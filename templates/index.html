@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Min Nettbutikk - Oppgave</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* Временные стили для наглядности */
+        body { font-family: sans-serif; line-height: 1.6; padding: 20px; max-width: 800px; margin: auto; }
+        .product-card { border: 1px solid #ddd; padding: 15px; margin-bottom: 10px; border-radius: 5px; display: flex; justify-content: space-between; align-items: center; }
+        .cookie-banner { position: fixed; bottom: 0; left: 0; width: 100%; background: #333; color: white; padding: 20px; text-align: center; display: none; }
+        .cookie-banner button { background: #4CAF50; color: white; border: none; padding: 10px 20px; cursor: pointer; margin-left: 10px; }
+        .history-section { background: #f4f4f4; padding: 15px; margin-top: 30px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>Velkommen til vår nettbutikk</h1>
+    <p>Utforsk våre produkter nedenfor.</p>
+
+    <div class="product-list">
+        {% for product in products %}
+        <div class="product-card">
+            <div>
+                <strong>{{ product.name }}</strong> — {{ product.price }} kr
+            </div>
+            <a href="{{ url_for('add_to_cart', prod_id=product.id) }}" onclick="return checkConsent()">Legg i handlekurv</a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="history-section">
+        <h3>Sist sett (Din historikk):</h3>
+        {% if last_viewed %}
+            <ul>
+            {% for item in last_viewed %}
+                <li>{{ item }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>Du har ikke sett på noen produkter ennå.</p>
+        {% endif %}
+    </div>
+
+    <div id="cookie-banner" class="cookie-banner">
+        <p>Vi bruker cookies for å lagre handlekurven din. Godtar du dette?</p>
+        <button onclick="acceptCookies()">Jeg godtar</button>
+    </div>
+
+    <script>
+        // Простая логика проверки согласия
+        function checkConsent() {
+            if (!localStorage.getItem('cookie_consent')) {
+                alert("Du må godta cookies før du kan legge varer i kurven.");
+                document.getElementById('cookie-banner').style.display = 'block';
+                return false;
+            }
+            return true;
+        }
+
+        function acceptCookies() {
+            localStorage.setItem('cookie_consent', 'true');
+            document.getElementById('cookie-banner').style.display = 'none';
+            alert("Takk! Nå kan du handle.");
+        }
+
+        // Показать баннер, если согласие еще не дано
+        window.onload = function() {
+            if (!localStorage.getItem('cookie_consent')) {
+                document.getElementById('cookie-banner').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
