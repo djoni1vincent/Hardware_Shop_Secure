@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="no">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Handlekurv</title>
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/style.css') }}"
+        />
+    </head>
+    <body>
+        <a href="/" style="color: #222; text-decoration: none"
+            >← Tilbake til butikken</a
+        >
+
+        <h1>Din Handlekurv</h1>
+
+        <div class="product-list">
+            {% if cart_items %} {% for item in cart_items %}
+            <div class="product-card">
+                <span>{{ item.name }}</span>
+                <span>{{ item.price }} kr</span>
+            </div>
+
+            {% endfor %}
+
+            <div style="text-align: right; margin-top: 20px">
+                <strong>Total: {{ total }} kr</strong>
+            </div>
+
+            <div style="margin-top: 20px; display: flex; gap: 20px">
+                <a
+                    href="{{ url_for('clear_cart') }}"
+                    style="
+                        color: red;
+                        border: 2px solid red;
+                        padding: 5px 15px;
+                        text-decoration: none;
+                    "
+                    >Tøm kurv</a
+                >
+                <button
+                    onclick="
+                        alert('Betaling ikke implementert i denne versjonen')
+                    "
+                    class="btn-accept"
+                    style="padding: 10px 20px"
+                >
+                    Gå til kassen
+                </button>
+            </div>
+            {% else %}
+            <p>Kurven din er tom.</p>
+            {% endif %}
+        </div>
+    </body>
+</html>
