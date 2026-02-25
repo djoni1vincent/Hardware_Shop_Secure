@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="no">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Personvernerklæring - Min Nettbutikk</title>
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/style.css') }}"
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div class="container">
+            <a href="/" class="back-btn">← Tilbake til butikken</a>
+            <h1>Personvernerklæring</h1>
+            <p>
+                Denne erklæringen forklarer hvordan vi samler inn og bruker
+                informasjon i denne nettbutikken.
+            </p>
+
+            <h2>1. Hva samles inn?</h2>
+            <p>
+                Vi samler kun inn nødvendig informasjon for at nettbutikken skal
+                fungere teknisk:
+            </p>
+            <ul>
+                <li>
+                    <strong>Handlekurv:</strong> ID-numre på produktene du har
+                    valgt.
+                </li>
+                <li>
+                    <strong>Sist sett:</strong> En liste over navnene på de
+                    siste produktene du har klikket på.
+                </li>
+                <li>
+                    <strong>Samtykke:</strong> Informasjon om at du har godkjent
+                    bruk av informasjonskapsler (cookies).
+                </li>
+            </ul>
+
+            <h2>2. Hva er formålet?</h2>
+            <p>
+                Formålet med innsamlingen er å gi deg en god brukeropplevelse.
+                Handlekurven lagres slik at varene ikke forsvinner når du
+                navigerer mellom sider, og "Sist sett"-funksjonen hjelper deg å
+                finne tilbake til produkter.
+            </p>
+
+            <h2>3. Hvor lenge lagres dataene?</h2>
+            <p>
+                Dataene lagres i en
+                <strong>sesjonsbasert informasjonskapsel</strong>. Dette betyr
+                at informasjonen slettes automatisk fra serveren og din
+                nettleser når du lukker programmet eller tømmer nettleserdata.
+            </p>
+
+            <h2>4. Deling med tredjeparter</h2>
+            <p>
+                Vi deler ingen informasjon med tredjeparter. All data blir kun
+                brukt internt i denne applikasjonen.
+            </p>
+
+            <h2>5. Din rett til sletting</h2>
+            <p>
+                Siden vi bruker informasjonskapsler (cookies), har du full
+                kontroll. Du kan når som helst be om sletting ved å:
+            </p>
+            <ul>
+                <li>
+                    Slette informasjonskapsler i innstillingene i din nettleser.
+                </li>
+                <li>Tømme din "Local Storage" via utviklerverktøy.</li>
+            </ul>
+        </div>
+    </body>
+</html>
