@@ -16,12 +16,27 @@
         />
     </head>
     <body>
+        <nav style="text-align: right; margin-bottom: 20px">
+            <a
+                href="{{ url_for('view_cart') }}"
+                style="
+                    border: 2px solid #222;
+                    padding: 5px 15px;
+                    color: #222;
+                    text-decoration: none;
+                "
+            >
+                🛒 Handlekurv ({{ session.get('cart', [])|length }})
+            </a>
+        </nav>
         <h1>Velkommen til vår nettbutikk</h1>
         <p>Utforsk våre produkter nedenfor.</p>
 
-        <div class="product-list">
+        <div class="product-list" id="product-container">
             {% for product in products %}
-            <div class="product-card">
+            <div
+                class="product-card {% if loop.index > 3 %}hidden-product{% endif %}"
+            >
                 <div>
                     <strong>{{ product.name }}</strong> — {{ product.price }} kr
                 </div>
@@ -33,6 +48,19 @@
             </div>
             {% endfor %}
         </div>
+
+        {% if products|length > 3 %}
+        <div style="text-align: center; margin-top: 20px">
+            <button
+                id="show-more-btn"
+                onclick="toggleProducts()"
+                class="btn-accept"
+                style="background: #222; color: #fff"
+            >
+                Vis flere produkter
+            </button>
+        </div>
+        {% endif %}
 
         <div class="history-section">
             <h3>Sist sett (Din historikk):</h3>
