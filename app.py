@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request, session, url_for
+from flask import Flask, redirect, render_template, session, url_for
 
 products = [
     {'id': 1, 'name': 'Gaming mus', 'price': 499},
@@ -17,8 +17,6 @@ def index():
 
     return render_template('index.html', title='Home', products=products, last_viewed=last_viewed)
 
-
-
 @app.route('/add/<int:prod_id>')
 def add_to_cart(prod_id):
     if 'cart' not in session:
@@ -36,7 +34,6 @@ def add_to_cart(prod_id):
         session['last_viewed'] = last_viewed[:5]
 
     return redirect(url_for('index'))
-
 
 
 
