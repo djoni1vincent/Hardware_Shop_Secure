@@ -15,6 +15,18 @@ h1 {
     margin-bottom: 20px;
 }
 
+.hidden-product {
+    display: none !important;
+}
+
+#show-more-btn {
+    font-family: "VT323", monospace;
+    font-size: 28px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border: 2px solid #222;
+}
+
 .product-card {
     background: white;
     border: 2px solid #333;
@@ -50,6 +62,7 @@ h1 {
 }
 
 .cookie-popup {
+    margin-bottom: 50px;
     display: none;
     position: fixed;
     bottom: -20px;
@@ -68,7 +81,7 @@ h1 {
 }
 
 .cookie-content h3 {
-    margin-top: 0;
+    margin-top: -10px;
     color: #00ff00;
     font-size: 45px;
     text-transform: uppercase;
