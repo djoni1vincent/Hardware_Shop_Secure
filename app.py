@@ -1,5 +1,7 @@
+import os
 import smtplib
 
+from dotenv import load_dotenv
 from flask import Flask, redirect, render_template, request, session, url_for
 
 products = [
@@ -17,9 +19,13 @@ products = [
     {"id": 12, "name": "RAM 32GB DDR5", "price": 3999}
 ]
 
+load_dotenv()
+
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = 'a-very-secret-and-long-string'
+EMAIL = os.environ.get('EMAIL')
+PASSWORD = os.environ.get('PASSWORD')
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'default-key-for-dev')
 
 @app.route('/')
 def index():
@@ -93,11 +99,15 @@ def pay_order():
                 total_price += product['price']
 
     try:
-        sender_email = EMAIL
-        message = f'Subject: Order Confirmation\n\nConfirmation of your order:\n\n{[item for item in cart_items]}\n\nTotal price: {total_price}'
+        if not EMAIL or not PASSWORD:
+            return "<h1>Feil: Serveren er ikke konfigurert med e-postlegitimasjon.</h1>"
+
+        items_text = ", ".join(cart_items)
+
+        message = f'Subject: Order Confirmation\n\nConfirmation of your order:\n\n{items_text}\n\nTotal price: {total_price} kr'
         with smtplib.SMTP('smtp.gmail.com', 587) as server:
             server.starttls()
-            server.login(sender_email, PASSWORD)
+            server.login(EMAIL, PASSWORD)
             server.sendmail(from_addr=EMAIL, to_addrs=receiver_email, msg=message)
 
         session.pop('cart', None)
