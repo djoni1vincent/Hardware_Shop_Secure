@@ -43,10 +43,16 @@ To set up and run the application locally, follow these steps:
 3.  **Install Dependencies**:
 
     ```
-    pip install flask
+    pip install flask python-dotenv
     ```
 
-4.  **Run the Application**:
+4.  **Configure Environment Variables**:
+    Create a `.env` file in the project root or use `variable.flaskenv` (as it's often used with Flask for development) with the following variables:
+    - `EMAIL`: Email address for sending order confirmations.
+    - `PASSWORD`: App-specific password for the email address (if using Gmail, generate one from Google Account settings).
+    - `SECRET_KEY`: A strong, random key for securing Flask sessions.
+
+5.  **Run the Application**:
     ```
     flask run
     ```
