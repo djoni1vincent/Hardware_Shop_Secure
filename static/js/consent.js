@@ -23,15 +23,12 @@ window.onload = function () {
 };
 
 function toggleProducts() {
-    // Находим все скрытые товары
     const hiddenProducts = document.querySelectorAll('.hidden-product');
     const btn = document.getElementById('show-more-btn');
 
     hiddenProducts.forEach(product => {
-        // Убираем класс, чтобы показать товары
         product.classList.remove('hidden-product');
     });
 
-    // Прячем саму кнопку, так как показывать больше нечего
     btn.style.display = 'none';
 }
