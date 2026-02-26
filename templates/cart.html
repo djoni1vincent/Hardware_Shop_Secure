@@ -2,53 +2,56 @@
 <html lang="no">
     <head>
         <meta charset="UTF-8" />
-        <title>Handlekurv</title>
+        <title>Handlekurv - {{ title }}</title>
         <link
             rel="stylesheet"
             href="{{ url_for('static', filename='css/style.css') }}"
         />
     </head>
     <body>
-        <a href="/" style="color: #222; text-decoration: none"
-            >← Tilbake til butikken</a
-        >
+        <a href="/" style="color: #00ff00; text-decoration: none"
+            >[ < ] GÅ TILBAKE</a
+        ><br>
 
-        <h1>Din Handlekurv</h1>
+        <h1>Din Handlekurv _</h1> 
 
         <div class="product-list">
             {% if cart_items %} {% for item in cart_items %}
             <div class="product-card">
-                <span>{{ item.name }}</span>
-                <span>{{ item.price }} kr</span>
+                <span>> {{ item.name }}</span>
+                <span>{{ item.price }} KR</span>
             </div>
-
             {% endfor %}
 
-            <div style="text-align: right; margin-top: 20px">
-                <strong>Total: {{ total }} kr</strong>
-            </div>
+            <div class="total-section">TOTAL: {{ total }} KR</div>
 
-            <div style="margin-top: 20px; display: flex; gap: 20px">
-                <a
-                    href="{{ url_for('clear_cart') }}"
-                    style="
-                        color: red;
-                        border: 2px solid red;
-                        padding: 5px 15px;
-                        text-decoration: none;
-                    "
-                    >Tøm kurv</a
-                >
-                <form action="{{ url_for('pay_order') }}" method="POST" style="margin-top: 20px;">
-                    <label for="email">Skriv inn din e-post:</label><br>
-                    <input type="email" id="email" name="user_email" required 
-                        style="font-family: 'VT323'; font-size: 24px; padding: 5px; width: 100%; max-width: 400px;">
-                    <br><br>
-                    <button type="submit" class="btn-accept">Fullfør bestilling</button>
+            <div class="checkout-container">
+                <form action="{{ url_for('pay_order') }}" method="POST">
+                    <label for="email"
+                        >SKRIV INN DIN E-POST FOR BEKREFTELSE:</label
+                    >
+                    <input
+                        type="email"
+                        id="email"
+                        name="user_email"
+                        required
+                        placeholder="USER@TERMINAL.COM"
+                    />
+
+                    <button type="submit" class="btn-primary">
+                        FULLFØR BESTILLING _
+                    </button>
                 </form>
+                <div style="margin-top: 20px">
+                    <a href="{{ url_for('clear_cart') }}" class="btn-danger"
+                        >[ TØM KURV ]</a
+                    >
+                </div>
             </div>
             {% else %}
-            <p>Kurven din er tom.</p>
+            <p style="color: #555">
+                KURVEN DIN ER TOM. VENNLIGST VELG PRODUKTER.
+            </p>
             {% endif %}
         </div>
     </body>

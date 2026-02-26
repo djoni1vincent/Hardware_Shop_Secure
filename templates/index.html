@@ -1,81 +1,61 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="no">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Min Nettbutikk - Oppgave</title>
-        <link
-            rel="stylesheet"
-            href="{{ url_for('static', filename='css/style.css') }}"
-        />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
-            rel="stylesheet"
-        />
-    </head>
-    <body>
-        <nav style="text-align: right; margin-bottom: 20px">
-            <a
-                href="{{ url_for('view_cart') }}"
-                style="
-                    border: 2px solid #222;
-                    padding: 5px 15px;
-                    color: #222;
-                    text-decoration: none;
-                "
-            >
-                Handlekurv ({{ session.get('cart', [])|length }})
-            </a>
-        </nav>
-        <h1>Velkommen til vår nettbutikk</h1>
-        <p>Utforsk våre produkter nedenfor.</p>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TERMINAL STORE - {{ title }}</title>
 
-        <div class="product-list" id="product-container">
-            {% for product in products %}
-            <div
-                class="product-card {% if loop.index > 3 %}hidden-product{% endif %}"
-            >
-                <div>
-                    <strong>{{ product.name }}</strong> — {{ product.price }} kr
-                </div>
-                <a
-                    href="{{ url_for('add_to_cart', prod_id=product.id) }}"
-                    onclick="return checkConsent();"
-                    >Legg i handlekurv</a
-                >
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet" />
+</head>
+<body>
+    <nav style="text-align: right; margin-bottom: 20px">
+        <a href="{{ url_for('view_cart') }}" class="btn-danger" style="text-decoration: none; padding: 10px;">
+            [ HANDLEKURV: {{ session.get('cart', [])|length }} ]
+        </a>
+    </nav>
+
+    <h1>BUTTIK _</h1>
+    <p>>VELG PRODUKTER:</p>
+
+    <div class="product-list" id="product-container">
+        {% for product in products %}
+        <div class="product-card {% if loop.index > 3 %}hidden-product{% endif %}">
+            <div>
+                <strong>{{ product.name }}</strong> — {{ product.price }} KR
             </div>
+            <a href="{{ url_for('add_to_cart', prod_id=product.id) }}"
+               onclick="return checkConsent();">
+               [ LEGG I KURV ]
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% if products|length > 3 %}
+    <div style="text-align: center; margin-top: 20px">
+        <button id="show-more-btn" onclick="toggleProducts()" class="btn-accept">
+            VIS FLERE PRODUKTER
+        </button>
+    </div>
+    {% endif %}
+
+  <div class="history-section">
+    <h3>[ SISTE AKTIVITETSLOGG ]</h3>
+    {% if last_viewed %}
+        <ul>
+            {% for item in last_viewed %}
+            <li>ACCESSING_DATA: {{ item }}... OK</li>
             {% endfor %}
-        </div>
+        </ul>
+    {% else %}
+        <p>> INGEN DATA FUNNET I SYSTEMLOGGEN.</p>
+    {% endif %}
+  </div>
 
-        {% if products|length > 3 %}
-        <div style="text-align: center; margin-top: 20px">
-            <button
-                id="show-more-btn"
-                onclick="toggleProducts()"
-                class="btn-accept"
-                style="background: #222; color: #fff"
-            >
-                Vis flere produkter
-            </button>
-        </div>
-        {% endif %}
-
-        <div class="history-section">
-            <h3>Sist sett (Din historikk):</h3>
-            {% if last_viewed %}
-            <ul>
-                {% for item in last_viewed %}
-                <li>{{ item }}</li>
-                {% endfor %}
-            </ul>
-            {% else %}
-            <p>Du har ikke sett på noen produkter ennå.</p>
-            {% endif %}
-        </div>
-
-        <div id="cookie-banner" class="cookie-popup">
+      <div id="cookie-banner" class="cookie-popup">
             <div class="cookie-content">
                 <h3>Informasjonskapsler</h3>
                 <p>
