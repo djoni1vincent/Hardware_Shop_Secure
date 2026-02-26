@@ -8,8 +8,8 @@ This is an educational IT project developed as part of the "Utvikling" course. I
 
 - **Product Listing**: Displays a list of available products.
 - **Shopping Cart**: Manages selected items using server-side sessions.
-- **Recently Viewed Products**: Tracks user browsing history using client-side storage.
-- **Cookie Management**: Handles user consent for cookies via `localStorage`.
+- **Recently Viewed Products**: Tracks user browsing history using server-side sessions.
+- **Cookie Management**: Handles user consent for cookies via server-side sessions.
 
 ## Security Measures
 
@@ -50,7 +50,7 @@ To set up and run the application locally, follow these steps:
     Create a `.env` file in the project root or use `variable.flaskenv` (as it's often used with Flask for development) with the following variables:
     - `EMAIL`: Email address for sending order confirmations.
     - `PASSWORD`: App-specific password for the email address (if using Gmail, generate one from Google Account settings).
-    - `SECRET_KEY`: A strong, random key for securing Flask sessions.
+    - `SECRET_KEY`: A strong, random key for securing Flask sessions. **Important: Do not use a default or easily guessable key in production environments.**
 
 5.  **Run the Application**:
     ```
