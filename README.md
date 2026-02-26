@@ -1,4 +1,4 @@
-# Retro Spillbutikk - Skoleoppgave
+# Skoleoppgave
 
 ## Project Overview
 
@@ -48,7 +48,7 @@ To set up and run the application locally, follow these steps:
 
 4.  **Run the Application**:
     ```
-    python app.py
+    flask run
     ```
 
 The application will typically be accessible at `http://127.0.0.1:5000/` in your web browser.
