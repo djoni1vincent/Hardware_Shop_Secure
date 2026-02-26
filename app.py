@@ -1,6 +1,6 @@
 import os
 import smtplib
-
+import ssl
 from dotenv import load_dotenv
 from flask import Flask, redirect, render_template, request, session, url_for
 
@@ -25,11 +25,10 @@ app = Flask(__name__)
 
 EMAIL = os.environ.get('EMAIL')
 PASSWORD = os.environ.get('PASSWORD')
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'default-key-for-dev')
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
 @app.route('/')
 def index():
-    session['key'] = 'value'
     last_viewed = session.get('last_viewed', [])
 
     return render_template('index.html', title='Home', products=products, last_viewed=last_viewed)
@@ -72,7 +71,7 @@ def view_cart():
                 break
 
 
-    return render_template('cart.html', title='Cart', cart_items=cart_items, total=total_price, clear_cart=clear_cart)
+    return render_template('cart.html', title='Cart', cart_items=cart_items, total=total_price)
 
 @app.route('/clear_cart')
 def clear_cart():
@@ -104,11 +103,13 @@ def pay_order():
 
         items_text = ", ".join(cart_items)
 
+
         message = f'Subject: Order Confirmation\n\nConfirmation of your order:\n\n{items_text}\n\nTotal price: {total_price} kr'
-        with smtplib.SMTP('smtp.gmail.com', 587) as server:
-            server.starttls()
+        
+        context = ssl.create_default_context()
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as server:
             server.login(EMAIL, PASSWORD)
-            server.sendmail(from_addr=EMAIL, to_addrs=receiver_email, msg=message)
+            server.sendmail(EMAIL, receiver_email, message)
 
         session.pop('cart', None)
         return "<h1>Takk! Bekreftelse er sendt til din e-post.</h1><a href='/'>Tilbake til butikken</a>"
