@@ -107,4 +107,6 @@ def pay_order():
         return f"<h1>Feil ved sending av e-post: {e}</h1><a href='/cart'>Prøv igjen</a>"
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    import os
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
