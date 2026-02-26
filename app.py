@@ -1,4 +1,6 @@
-from flask import Flask, redirect, render_template, session, url_for
+import smtplib
+
+from flask import Flask, redirect, render_template, request, session, url_for
 
 products = [
     {"id": 1, "name": "Gaming mus", "price": 499},
@@ -11,8 +13,8 @@ products = [
     {"id": 8, "name": "Webkamera 4K", "price": 1150},
     {"id": 9, "name": "Mikrofon (USB)", "price": 750},
     {"id": 10, "name": "Prosessor i7-14700K", "price": 5200},
-    {"id": 11, "name": "SSD 2TB NVMe", "price": 1400},
-    {"id": 12, "name": "RAM 32GB DDR5", "price": 1650}
+    {"id": 11, "name": "SSD 2TB NVMe", "price": 2000},
+    {"id": 12, "name": "RAM 32GB DDR5", "price": 3999}
 ]
 
 app = Flask(__name__)
@@ -63,12 +65,46 @@ def view_cart():
                 total_price += product['price']
                 break
 
+
     return render_template('cart.html', title='Cart', cart_items=cart_items, total=total_price, clear_cart=clear_cart)
 
 @app.route('/clear_cart')
 def clear_cart():
     session.pop('cart', None)
     return redirect(url_for('view_cart'))
+
+@app.route('/checkout', methods=['POST'])
+def pay_order():
+
+    cart_ids = session.get('cart', [])
+    if not cart_ids:
+        return redirect(url_for('index'))
+
+    receiver_email = request.form.get("user_email")
+    if not receiver_email:
+        return "Feil: E-postadresse mangler!", 400
+
+    cart_items = []
+    total_price = 0
+    for item_id in cart_ids:
+        for product in products:
+            if product['id'] == item_id:
+                cart_items.append(product['name'])
+                total_price += product['price']
+
+    try:
+        sender_email = EMAIL
+        message = f'Subject: Order Confirmation\n\nConfirmation of your order:\n\n{[item for item in cart_items]}\n\nTotal price: {total_price}'
+        with smtplib.SMTP('smtp.gmail.com', 587) as server:
+            server.starttls()
+            server.login(sender_email, PASSWORD)
+            server.sendmail(from_addr=EMAIL, to_addrs=receiver_email, msg=message)
+
+        session.pop('cart', None)
+        return "<h1>Takk! Bekreftelse er sendt til din e-post.</h1><a href='/'>Tilbake til butikken</a>"
+
+    except Exception as e:
+        return f"<h1>Feil ved sending av e-post: {e}</h1><a href='/cart'>Prøv igjen</a>"
 
 if __name__ == '__main__':
     app.run(debug=True)
