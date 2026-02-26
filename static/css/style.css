@@ -1,13 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
 
 body {
-    font-family: "VT323", monospace; /* Использование ретро-шрифта */
+    font-family: "VT323", monospace;
     line-height: 1.2;
     padding: 20px;
     max-width: 900px;
     margin: auto;
-    background-color: #0d0d0d; /* Глубокий черный фон для атмосферы */
-    color: #00ff41; /* Тот самый зеленый из Матрицы */
+    background-color: #0d0d0d;
+    color: #00ff41;
     font-size: 28px;
     text-shadow: 2px 2px 0px #000;
 }
@@ -39,7 +39,7 @@ h1::after {
 h1,
 h3,
 label {
-    color: #00ff00; /* Использование зеленого неонового цвета */
+    color: #00ff00;
     text-transform: uppercase;
 }
 
@@ -53,7 +53,7 @@ label {
 
 .product-card {
     background: #1a1a1a;
-    border: 3px solid #00ff41; /* Неоновая рамка */
+    border: 3px solid #00ff41;
     padding: 20px;
     margin-bottom: 15px;
     border-radius: 0px;
@@ -90,10 +90,10 @@ label {
 }
 
 .history-section {
-    background: #111; /* Темный фон вместо светлого */
+    background: #111;
     padding: 20px;
     margin-top: 40px;
-    border: 2px dashed #00ff41; /* Пунктирная неоновая рамка */
+    border: 2px dashed #00ff41;
     font-size: 22px;
     position: relative;
     box-shadow: 6px 6px 0px #000;
@@ -101,7 +101,7 @@ label {
 
 .history-section h3 {
     margin-top: 0;
-    color: #fff; /* Белый заголовок для контраста */
+    color: #fff;
     background: #00ff41;
     color: #000;
     display: inline-block;
@@ -110,20 +110,20 @@ label {
 }
 
 .history-section ul {
-    list-style: none; /* Убираем стандартные точки */
+    list-style: none;
     padding-left: 5px;
     margin-top: 15px;
 }
 
 .history-section li::before {
-    content: "> "; /* Имитация командной строки */
+    content: "> ";
     color: #00ff41;
     font-weight: bold;
 }
 
 .history-section li {
     margin-bottom: 5px;
-    color: #00ff41; /* Зеленый текст логов */
+    color: #00ff41;
 }
 
 .cookie-popup {
@@ -184,13 +184,12 @@ label {
 .total-section {
     text-align: right;
     font-size: 40px;
-    color: #fff; /* Белый цвет для акцента */
+    color: #fff;
     margin: 30px 0;
     border-top: 2px dashed #00ff00;
     padding-top: 10px;
 }
 
-/* --- Кнопки и формы --- */
 .checkout-container {
     background: #222;
     padding: 25px;
@@ -205,8 +204,8 @@ label {
 }
 
 input[type="email"] {
-    background: #000; /* Темный фон для ввода */
-    border: 2px solid #00ff00; /* Зеленая рамка */
+    background: #000;
+    border: 2px solid #00ff00;
     color: #00ff00;
     font-family: "VT323", monospace;
     font-size: 28px;
@@ -221,9 +220,8 @@ input[type="email"]:focus {
     box-shadow: 0 0 10px #00ff00;
 }
 
-/* Кнопка опасности (например, Tøm kurv) */
 .btn-danger {
-    color: #ff0000; /* Красный цвет для предупреждения */
+    color: #ff0000;
     border: 2px solid #ff0000;
     background: transparent;
     padding: 5px 15px;
@@ -238,11 +236,10 @@ input[type="email"]:focus {
     color: #000;
 }
 
-/* Универсальная кнопка действия (как Fullfør bestilling) */
 .btn-primary,
 .btn-accept {
-    background: #00ff00; /* Зеленый фон кнопки */
-    color: #000; /* Черный цвет текста */
+    background: #00ff00;
+    color: #000;
     border: none;
     padding: 15px 30px;
     font-family: "VT323", monospace;
@@ -256,6 +253,6 @@ input[type="email"]:focus {
 
 .btn-primary:hover,
 .btn-accept:hover {
-    background: #fff; /* Белый фон при наведении */
+    background: #fff;
     color: #000;
 }
