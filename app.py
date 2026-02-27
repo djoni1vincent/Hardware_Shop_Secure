@@ -1,6 +1,7 @@
 import os
 import smtplib
 import ssl
+
 from dotenv import load_dotenv
 from flask import Flask, redirect, render_template, request, session, url_for
 
@@ -105,7 +106,7 @@ def pay_order():
 
 
         message = f'Subject: Order Confirmation\n\nConfirmation of your order:\n\n{items_text}\n\nTotal price: {total_price} kr'
-        
+
         context = ssl.create_default_context()
         with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as server:
             server.login(EMAIL, PASSWORD)
@@ -118,6 +119,4 @@ def pay_order():
         return f"<h1>Feil ved sending av e-post: {e}</h1><a href='/cart'>Prøv igjen</a>"
 
 if __name__ == '__main__':
-    import os
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port, debug=True)
+     app.run(debug=True)
