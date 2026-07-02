@@ -1,8 +1,8 @@
-# Skoleoppgave
+# Hardware Shop Secure
 
-## Project Overview
+A Flask web store built with a security-first approach — GDPR-compliant cookie consent, server-side session management, and input validation. Includes a full threat analysis in [`threats.md`](threats.md).
 
-This is an educational IT project developed as part of the "Utvikling" course. It implements a secure web store with a focus on data protection (GDPR compliance) and session security. The store features a shopping cart, a "recently viewed" product system, and a mandatory cookie consent banner to demonstrate practical application of web security principles.
+> School project from the "Utvikling" course, extended with a focus on practical web security.
 
 ## Features
 
